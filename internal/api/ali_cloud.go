@@ -86,14 +86,15 @@ func describeBackupsAPI(istID string, startTime, endTime string) (*r_kvstore2015
 	return resp.Body, nil
 }
 
-func createCacheAnalysisJobAPI(istID, nodeID, bakID string) (*das20200116.CreateCacheAnalysisJobResponseBodyData, error) {
+// 创建缓存分析任务API
+func createCacheAnalysisJobAPI(istID, bakID string) (*das20200116.CreateCacheAnalysisJobResponseBodyData, error) {
 	client, err := createAnalysisClient()
 	if err != nil {
 		return nil, err
 	}
 	createCacheAnalysisJobRequest := &das20200116.CreateCacheAnalysisJobRequest{
-		InstanceId:  &istID,
-		NodeId:      &nodeID,
+		InstanceId: &istID,
+		// NodeId:      &nodeID,
 		BackupSetId: &bakID,
 	}
 	runtime := &util.RuntimeOptions{}
@@ -182,7 +183,7 @@ func CreateAnalysisJob(ctx context.Context, istID string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	respData, err := createCacheAnalysisJobAPI(istID, istID, bakID)
+	respData, err := createCacheAnalysisJobAPI(istID, bakID)
 	if err != nil {
 		return "", err
 	}
