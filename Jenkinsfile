@@ -21,14 +21,14 @@ pipeline {
 
     // 构建步骤
     stages {
-        stage('Checkout GitHub Branch and Pull Code') {
-            steps {
-                // 从 GitHub 仓库检出代码
-                checkout([$class: 'GitSCM', 
-                        branches: [[name: '*/main']], 
-                        userRemoteConfigs: [[url: 'https://github.com/Zy1bREAd/ali_tair_analysis.git']]])
-            }
-        }
+        // stage('Checkout GitHub Branch and Pull Code') {
+        //     steps {
+        //         // 从 GitHub 仓库检出代码
+        //         checkout([$class: 'GitSCM', 
+        //                 branches: [[name: '*/main']], 
+        //                 userRemoteConfigs: [[url: 'https://github.com/Zy1bREAd/ali_tair_analysis.git']]])
+        //     }
+        // }
         stage('Build On Image For Develop') {
             when {
                 branch 'main'
